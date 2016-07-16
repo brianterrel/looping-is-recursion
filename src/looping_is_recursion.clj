@@ -25,8 +25,8 @@
 
 (defn seq= [seq1 seq2]
   (cond
-    (or (nil? seq1) (nil? seq2)) false
     (and (empty? seq1) (empty? seq2)) true
+    (or (empty? seq1) (empty? seq2)) false
     (not (= (first seq1) (first seq2))) false
     :else (recur (rest seq1) (rest seq2))))
 
@@ -34,7 +34,7 @@
 (seq= [1 2 4] '(1 2 4))  ;=> true
 (seq= [1 2 3] [1 2 3 4]) ;=> false
 (seq= [1 3 5] [])        ;=> false
-(seq= [] nil)
+(seq= [1 2 3] [1 2 3 nil])
 
 (defn find-first-index [pred a-seq]
   (loop [n 0
